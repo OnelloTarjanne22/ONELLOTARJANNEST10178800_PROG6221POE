@@ -161,7 +161,7 @@ namespace ONELLOTARJANNEST10178800PROG6211POEP1
             }
             return totalCalories;
         }
-
+//To string that displays the recipe when requested
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
