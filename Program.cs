@@ -3,147 +3,159 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;//ONELLO TARJANNE ST10178800 GROUP:3 //All code has been coded by myself and with use of sources listed in reference list
+
 namespace ONELLOTARJANNEST10178800PROG6211POEP1
 {
     class Program
     {
         static void Main()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Welcome to the Recipe Library!");
+            Console.ResetColor();
+            Recipe.CalorieWarning += DisplayCalorieWarning;
 
+            List<Recipe> recipes = new List<Recipe>();
 
-            Console.WriteLine("\nPlease enter the recipe details:");
-
-            // Get recipe name from the user
-            Console.Write("Recipe name: ");
-            string recipeName = Console.ReadLine();
-
-            // Get the number of ingredients
-            Console.Write("Number of ingredients: ");
-            int numIngredients;
-            while (!int.TryParse(Console.ReadLine(), out numIngredients))
-            {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-            }
-
-            // Initialize arrays for ingredients and steps
-            Ingredient[] ingredients = new Ingredient[numIngredients];
-            Step[] steps;
-
-            // Get details for each ingredient
-            for (int i = 0; i < numIngredients; i++)
-            {
-                Console.WriteLine($"\nIngredient {i + 1}:");
-                Console.Write("Name: ");
-                string ingredientName = Console.ReadLine();
-                Console.Write("Quantity: ");
-                double quantity;
-                while (!double.TryParse(Console.ReadLine(), out quantity))
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
-
-                }
-                Console.Write("Unit: ");
-                string unit = Console.ReadLine();
-
-                ingredients[i] = new Ingredient(ingredientName, quantity, unit);
-            }
-
-            // Get the number of steps
-            Console.Write("\nNumber of steps: ");
-            int numSteps;
-            while (!int.TryParse(Console.ReadLine(), out numSteps))
-            {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-            }
-            steps = new Step[numSteps];
-
-            // Get details for each step
-            for (int i = 0; i < numSteps; i++)
-            {
-                Console.WriteLine($"\nStep {i + 1}:");
-                Console.Write("Description: ");
-                string description = Console.ReadLine();
-
-                steps[i] = new Step(description);
-            }
-
-
-            Recipe recipe = new Recipe(recipeName, ingredients, steps);
-
-            // Display the recipe
-            Console.WriteLine("\nRecipe entered successfully!");
-            Console.WriteLine(recipe);
-
-            //Menu
             while (true)
             {
-                Console.WriteLine("\nChoose an action:");
-                Console.WriteLine("1. Scale Recipe");
-                Console.WriteLine("2. Reset Quantity");
-                Console.WriteLine("3. Clear Data");
-                Console.WriteLine("4. Show Recipe");
-                Console.WriteLine("5. Add new Recipe");
-                Console.WriteLine("6. Exit");
-                Console.WriteLine("-----------------------------------------------");
-                Console.Write("Enter your choice (1-6): ");
-                string choice = Console.ReadLine();
-                Console.WriteLine("-----------------------------------------------");
-                switch (choice)
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\nPlease enter the recipe details:");
+
+                Recipe recipe = Recipe.AddNewRecipe();
+                recipes.Add(recipe);
+
+                Console.WriteLine("\nRecipe entered successfully!");
+                Console.WriteLine(recipe);
+                Console.ForegroundColor = ConsoleColor.Blue;
+
+                // Menu
+                while (true)
                 {
-                    case "1":
-                        // Scale up recipe Ingredients
-                        Console.Write("Enter scale factor (0.5 for half, 2 for double, 3 for triple): ");
-                        double factor;
-                        while (!double.TryParse(Console.ReadLine(), out factor))
-                        {
-                            Console.WriteLine("Invalid factor. Please enter a valid number.");
-                            Console.Write("Enter scale factor (0.5 for half, 2 for double, 3 for triple): ");
-                        }
-                        recipe.AdjustQuantity(factor);
-                        Console.WriteLine("\nRecipe scaled successfully!");
-                        Console.WriteLine(recipe);
-                        Console.WriteLine("-----------------------------------------------");
+                    Console.WriteLine("\nChoose an action:");
+                    Console.WriteLine("1. Scale Recipe");
+                    Console.WriteLine("2. Reset Quantity");
+                    Console.WriteLine("3. Clear All Recipes");
+                    Console.WriteLine("4. Clear Specific Recipe");
+                    Console.WriteLine("5. Show Recipe");
+                    Console.WriteLine("6. Add new Recipe");
+                    Console.WriteLine("7. List All Recipes");
+                    Console.WriteLine("8. Exit");
+                    Console.WriteLine("-----------------------------------------------");
+                    Console.Write("Enter your choice (1-8): ");
+                    string choice = Console.ReadLine();
+                    Console.WriteLine("-----------------------------------------------");
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+
+                    switch (choice)
+                    {
+                        case "1":
+                            Console.Write("Enter the name of the recipe to scale up: ");
+                            string recipeNameToScale = Console.ReadLine();
+                            Recipe recipeToScale = Recipe.Recipes.FirstOrDefault(rec => rec.Name.Equals(recipeNameToScale, StringComparison.OrdinalIgnoreCase));
+                            if (recipeToScale != null)
+                            {
+                                Console.Write("Enter scale factor (0.5 for half, 2 for double, 3 for triple): ");
+                                double scaleFactor;
+                                while (!double.TryParse(Console.ReadLine(), out scaleFactor) || scaleFactor <= 0)
+                                {
+                                    Console.WriteLine("Invalid factor. Please enter a valid positive number.");
+                                    Console.Write("Enter scale factor (0.5 for half, 2 for double, 3 for triple): ");
+                                }
+                                recipeToScale.ScaleRecipe(scaleFactor);
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Recipe '{recipeNameToScale}' not found.");
+                            }
+                            break;
+
+                        case "2":
+                            // Reset recipe Quantities
+                            Console.Write("Enter the name of the recipe to reset quantity: ");
+                            string recipeNameToReset = Console.ReadLine();
+                            Recipe recipeToReset = Recipe.Recipes.FirstOrDefault(rec => rec.Name.Equals(recipeNameToReset, StringComparison.OrdinalIgnoreCase));
+                            if (recipeToReset != null)
+                            {
+                                recipeToReset.ResetQuantity();
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Recipe '{recipeNameToReset}' not found.");
+                            }
+                            break;
+
+                        case "3":
+                            // Clear all recipes
+                            Console.Write("Are you sure you want to clear all recipes? (yes/no): ");
+                            string confirmation = Console.ReadLine().ToLower();
+                            if (confirmation == "yes")
+                            {
+                                Recipe.ClearAllRecipes();
+                                recipes.Clear();
+                                Console.WriteLine("All recipes have been cleared.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Operation cancelled.");
+                            }
+                            break;
+
+                        case "4":
+                            // Clear specific recipe
+                            if (recipes.Count == 0)
+                            {
+                                Console.WriteLine("No recipes available to clear.");
+                            }
+                            else
+                            {
+                                Console.Write("Enter the name of the recipe to clear: ");
+                                string recipeName = Console.ReadLine();
+                                Recipe.ClearRecipe(recipeName);
+         
+                            }
+                            Console.WriteLine("-----------------------------------------------");
+                            break;
+
+                        case "5":
+                            Recipe.DisplaySpecificRecipe();
+                            break;
+
+                        case "6":
+                            // Exit current loop to add new recipe
+                            break;
+
+                        case "7":
+                            // List all recipes
+                            Recipe.DisplayAllRecipes();
+                            break;
+
+                        case "8":
+                            // Option to exit 
+                            Console.WriteLine("\nExiting the program. Goodbye!");
+                            return;
+
+                        default:
+                            Console.WriteLine("Invalid option. Please enter a number between 1 and 8.");
+                            break;
+                    }
+
+                    if (choice == "6")
                         break;
 
-
-                    case "2":
-                        //Reset recipe Quantities
-                        recipe.ResetQuantity();
-                        Console.WriteLine("\nQuantity reset successfully!");
-                        Console.WriteLine(recipe);
-                        Console.WriteLine("-----------------------------------------------");
-                        break;
-
-                    case "3":
-                        // Clears Recipe
-                        recipe.ClearRecipe();
-                        Console.WriteLine("\nData cleared successfully!");
-                        Console.WriteLine("-----------------------------------------------");
-                        break;
-
-                    case "4":
-                        Console.WriteLine(recipe);
-                        Console.WriteLine("-----------------------------------------------");
-                        break;
-                    case "5":
-                        //Adds new Recipe
-                        recipe = Recipe.AddNewRecipe();
-                        Console.WriteLine("\nRecipe added successfully!");
-                        Console.WriteLine("-----------------------------------------------");
-
-                        break;
-                    case "6":
-                        // Option to exit Program
-                        Console.WriteLine("\nExiting the program. Goodbye!");
-                        return;
-                    default:
-                        Console.WriteLine("Invalid choice. Please enter a number between 1 and 6.");
-                        break;
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.Blue;
                 }
             }
+        }
+       public static void DisplayCalorieWarning(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(message);
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Magenta;
 
         }
     }
-
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace ONELLOTARJANNEST10178800PROG6211POEP1
 {
     public class Ingredient
@@ -11,22 +10,28 @@ namespace ONELLOTARJANNEST10178800PROG6211POEP1
         public string Name { get; set; }
         public double Quantity { get; set; }
         public string Unit { get; set; }
-        private double originalQuantity;
-        public Ingredient(string name, double quantity, string unit)
+        public int Calories { get; set; }
+        public string FoodGroup { get; set; }
+        private double InitialQuantity { get; set; }
+
+        public Ingredient(string name, double quantity, string unit, int calories, string foodGroup)
         {
             Name = name;
             Quantity = quantity;
             Unit = unit;
-            originalQuantity = quantity;
+            Calories = calories;
+            FoodGroup = foodGroup;
+            InitialQuantity = quantity;  
         }
+
         public void ResetQuantity()
         {
-            Quantity = originalQuantity;
+            Quantity = InitialQuantity;
         }
 
         public override string ToString()
         {
-            return $"{Quantity} {Unit} of {Name}";
+            return $"{Name}: {Quantity} {Unit} ({Calories} calories)";
         }
     }
 }
