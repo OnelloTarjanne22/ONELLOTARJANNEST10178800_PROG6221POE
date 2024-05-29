@@ -149,6 +149,7 @@ namespace ONELLOTARJANNEST10178800PROG6211POEP1
                 }
             }
         }
+        //Delegate used to warn user if calorie count is high
        public static void DisplayCalorieWarning(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
