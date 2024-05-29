@@ -23,7 +23,7 @@ namespace ONELLOTARJANNEST10178800PROG6211POEP1
             FoodGroup = foodGroup;
             InitialQuantity = quantity;  
         }
-
+// Resets the quantity of the ingredients that are captured
         public void ResetQuantity()
         {
             Quantity = InitialQuantity;
