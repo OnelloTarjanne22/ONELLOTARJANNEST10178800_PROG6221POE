@@ -36,7 +36,7 @@ namespace ONELLOTARJANNEST10178800PROG6211POEP1
             {
                 Console.WriteLine("Invalid input. Please enter a valid number.");
             }
-
+//    Ingredients collection
             List<Ingredient> ingredients = new List<Ingredient>();
             for (int i = 0; i < numIngredients; i++)
             {
