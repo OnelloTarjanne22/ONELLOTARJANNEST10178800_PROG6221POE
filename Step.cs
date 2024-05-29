@@ -13,7 +13,7 @@ namespace ONELLOTARJANNEST10178800PROG6211POEP1
         {
             Description = description;
         }
-
+// To string for the steps
         public override string ToString()
         {
             return Description;
