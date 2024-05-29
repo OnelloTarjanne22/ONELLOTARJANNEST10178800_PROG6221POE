@@ -29,7 +29,7 @@ namespace ONELLOTARJANNEST10178800PROG6211POEP1
                 Console.WriteLine(recipe);
                 Console.ForegroundColor = ConsoleColor.Blue;
 
-                // Menu
+                // Menu displayed 
                 while (true)
                 {
                     Console.WriteLine("\nChoose an action:");
