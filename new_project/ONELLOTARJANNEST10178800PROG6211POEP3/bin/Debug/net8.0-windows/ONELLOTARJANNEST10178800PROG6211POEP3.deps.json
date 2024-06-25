@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "ONELLOTARJANNEST10178800PROG6211POEP3/1.0.0": {
+        "runtime": {
+          "ONELLOTARJANNEST10178800PROG6211POEP3.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ONELLOTARJANNEST10178800PROG6211POEP3/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

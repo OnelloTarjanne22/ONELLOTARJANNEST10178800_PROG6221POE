@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ONELLOTARJANNEST10178800PROG6211POEP3", "ONELLOTARJANNEST10178800PROG6211POEP3\ONELLOTARJANNEST10178800PROG6211POEP3.csproj", "{F4288C25-FE6C-466A-BF4B-A8B5707D283C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F4288C25-FE6C-466A-BF4B-A8B5707D283C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4288C25-FE6C-466A-BF4B-A8B5707D283C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4288C25-FE6C-466A-BF4B-A8B5707D283C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4288C25-FE6C-466A-BF4B-A8B5707D283C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8C4D9BCE-A4C1-49B5-A9E8-5E855E9107DC}
+	EndGlobalSection
+EndGlobal
